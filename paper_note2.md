@@ -1,6 +1,6 @@
-论文1：Redundant software (and hardware) ensured Curiosity reached its destination and functioned as its designers intended.
-作者： Gerard J. Holzmann
-论文主要内容：
+#论文1：Redundant software (and hardware) ensured Curiosity reached its destination and functioned as its designers intended.
+#作者： Gerard J. Holzmann
+#论文主要内容：
 	星际飞船控制软件的设计必须具有高标准的可靠性，任何细小的错误皆能造成任务失败，错失拓展人类知识的宝贵机会。在硬件和软件上均取了特别的措施，确保航天器可靠运行，并且系统能够在数百万英里之外进行调试和修复。形式化方法有助于验证复杂软件子系统中可能存在的争用情形和死锁；新型的模型检查技术可以实现这一验证过程的自动化。
 	文章着重介绍飞行软件团队在开发 MSL 任务软件过程中采取的的预防措施。作者将内容归纳为三方面：首先是作者采用的代码编写标准，它具有稀疏、基于风险和受自动化合规性检查工具支持的特点；其次是作者采用了被重新定义的代码审核流程，它可以让作者高效地对大量代码进行全面的清理，这也是利用工具来完成的；第三是逻辑模型检查工具，它可以形式化验证任务关键型代码段中是否存在与并发相关的缺陷。
 
