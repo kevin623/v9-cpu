@@ -12,12 +12,12 @@
  结论：采用Dune对于性能和安全性都是有改进的。
 
 
-论文2： IX: A Protected Dataplane Operating System for High Throughput and Low Latency
+###论文2： IX: A Protected Dataplane Operating System for High Throughput and Low Latency
 
-摘要：
+###摘要：
 网络需要快速的传输速度和微秒级的低延迟。我们介绍了IX，一个dataplane OS，它在维持内核可靠性的这一优点的同时能提供较高的IO性能。IX利用硬件虚拟化技术把内核管理和调度功能冲往来处理中分离开。dataplane这种结构建立在原始的零拷贝API和对带宽和往来队列优化基础之上。我们证实IX性能（吞吐量和端到端的延迟）超过LInux。此外，IX改善了广泛部署的吞吐量，关键性能达到原有的3.6倍，延迟降低了两倍。
 
-论文要点：
+###论文要点：
 数据中心应用正在重新定义系统软件需求。一个单一的应用可能由成百个服务组成，部署在上千台服务器上，能提供更高的性能。新需求包括短消息的高速传输，对于远程请求的微秒级的响应，支持海量连接和操作。拥有坚固的保护模式和富有弹性的资源应用，允许其它应用使用一个集群中的任何一个闲置的资源。
 一般看法认为在OS中，需求和网络栈存在不匹配。因此，一些系统绕过内核和在用户空间里的网络栈。当内核绕过上下文切换的瓶颈，它无法平衡数据包传输速率和低延迟。此外，用户级缺少保护。应用bug和崩溃能影响到网络栈和工作。其它系统通过远程内存直接访问来替换TCP/Ip,采用专用的适配器。但这样的适配器只能用在通信两端，只能用在数据中心。
 作者提出IX这种os，它打破了高吞吐率，低延迟，强保护和资源有效性这四方面的折衷。IX对数据中心结构进行扩展来支持不可信的，通用目的应用，来满足所有的4个需求。它的设计基于以下原则：控制平面和数据平面分离，由它负责资源配置，供给，调度和监视；Run to completion with adaptive batching；Native, zero-copy API with explicit flow control；Flow consistent, synchronization-free processing
