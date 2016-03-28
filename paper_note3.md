@@ -1,6 +1,6 @@
-论文1：Scalable Kernel TCP Design and Implementation for Short-Lived Connections
-作者：Xiaofeng Lin，Yu Chen，Xiaodong Li等
-主要内容：
+##论文1：Scalable Kernel TCP Design and Implementation for Short-Lived Connections
+##作者：Xiaofeng Lin，Yu Chen，Xiaodong Li等
+##主要内容：
 随着网络带宽的不断增长，CPU内核的增多以及移动应用带来更多的的短期连接需求，具有可扩展性的TCP协议栈日益成为系统性能的关键。
 尽管人们已经提出许多新的设计，但是生产环境任然需要自底向上，兼容现存应用的协议栈设计。
 作者提出了Fastsocket，兼容BSD套接字，并且可有可扩展性的内核套接字的新设计。它可以在TCP协议栈实现桌面级的连接划分，确保本地连接，包括主动连接和被动连接的情况。Fastsocket架构是一个分块的设计，它能去除在整个栈内的各种竞争锁定。此外，Fastsocket保持所有TCP协议栈基本功能和BSDsocket API的兼容，应用程序不需做任何修改。在Fastsocket，它主要做了三个方面的改动：1）对全局共享数据结构进行划分，引入listen table 和established 。2） 正确引导进入的数据包实现本地连接。3）在VFS中为socket提供一个快速路径，用于解决VFS中的兼容可扩展性问题和对BSD socket API的兼容。图1描述了Fastsocket架构，它由三部分构成。TCB数据结构的分割（local listen Table ,local established Table）;Receive Flow Deliver;Fastsocket-aware VFS.这三部分通过协作为每一个连接提供一个Per-Core 进程区域。为实现 the Per-Core Process Zone,作者对共享数据结构，连接内核绑定和VFS抽象实现进行了改进：
