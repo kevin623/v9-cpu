@@ -19,7 +19,7 @@
 
 Local ListenTable用于实现本地被动连接，而Receive Flow      Deliver用来解决主动本地连接的问题。要建立本地的主动连接，关键在于把当前内核对源端口编码。在此利用哈希函数把端口映射到CPU内核。当运行在CPU内核c上的应用试图建立一个主动连接。RFD选择一个源端口，此端口可以通过哈希函数对应到内核C。当收到响应报文，RFD从中检出目的端口，此端口就是RFD先前为内核选定的，它决定哪个内核处理这个数据包。当此内核当前没有处理数据时，RFD控制数据包到内核交由其处理。通过这个办法RFD保证每一个活动的连接总是能被同一个内存处理。  
 
-    支持Fastsocket的VFS。socket与磁盘上的文件有很大不同：1.Socket存在于内存之中，和存在于磁盘并能利用cache加速的普通文件相比，socket并不能从缓存机制中收益。2.socket通过文件数据结构的private_data field直接访问，不存在普通文件对应的目录路径的概念。目录项和索引节点对于sockets都是无效的。作者提出利用支持fastsocket的VFS来解决VFS平台的可扩展性问题，同时保持Fast-socket对传统VFS的兼容。 
+支持Fastsocket的VFS。socket与磁盘上的文件有很大不同：1.Socket存在于内存之中，和存在于磁盘并能利用cache加速的普通文件相比，socket并不能从缓存机制中收益。2.socket通过文件数据结构的private_data field直接访问，不存在普通文件对应的目录路径的概念。目录项和索引节点对于sockets都是无效的。作者提出利用支持fastsocket的VFS来解决VFS平台的可扩展性问题，同时保持Fast-socket对传统VFS的兼容。 
 
 
-    为了验证真实应用能否从FAStsocket中收益？相对于基本linux内核中的TCP协议栈，Fastsocket的可扩展性如何？作者在一个拥有24核，工作是提供短期连接的系统上做测试，采用Fastsocket之后，速度提升到原来的20.4倍。当扩展到24核后，与采用基本linux 内核相比，Fastsocket能够增加NGinx的吞吐量到267%，HAProxy吞吐量增加到621%。目前，Fastsocket已经在Sina WeiBo这个商业系统部署，每天服务5000万活跃用户的上亿次请求。
+为了验证真实应用能否从FAStsocket中收益？相对于基本linux内核中的TCP协议栈，Fastsocket的可扩展性如何？作者在一个拥有24核，工作是提供短期连接的系统上做测试，采用Fastsocket之后，速度提升到原来的20.4倍。当扩展到24核后，与采用基本linux 内核相比，Fastsocket能够增加NGinx的吞吐量到267%，HAProxy吞吐量增加到621%。目前，Fastsocket已经在Sina WeiBo这个商业系统部署，每天服务5000万活跃用户的上亿次请求。
